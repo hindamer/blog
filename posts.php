@@ -43,6 +43,7 @@
         <tbody>
         <?php
             include("oop.php");
+            include("index.php");
             $db = new Blog();
             $db->_get();
             $data = $db->select("*", "posts");

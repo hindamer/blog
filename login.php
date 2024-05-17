@@ -29,7 +29,6 @@
             padding: 70px 50px 20px 50px;
         }
 
-
         .fl {
             float: left;
             width: 110px;
@@ -96,6 +95,10 @@
     <div class="container">
         <?php
         session_start();
+        if(isset($_SESSION["logged"]) and $_SESSION["logged"]){
+        header("Location: posts.php");
+        die();
+        }
         include("oop.php");
         // include("registration.php");
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -111,14 +114,14 @@
                 $hash = $row['password'];
                 $verify = password_verify($pass, $hash);
                 if ($verify) {
-                    $_SESSION["admin"] = $admin;
+                    $_SESSION["logged"] = true;
                     header("location:posts.php");
                     die();
                 } else {
-                   echo "enter vaild pass";
+                    echo "enter vaild pass";
                 }
             } else {
-             echo "email not found";
+                echo "email not found";
             }
         }
 
@@ -137,9 +140,6 @@
                 </div>
                 <div class="clr"></div>
             </div>
-            <!--Email ID----->
-
-            <!---Password------>
             <div class="box">
                 <label for="password" class="fl fontLabel"> Password </label>
                 <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
@@ -152,14 +152,9 @@
                 </div>
                 <div class="clr"></div>
             </div>
-            <!---Password---->
-
-            <!---Submit Button------>
             <input type="Submit" name="Submit" class="submit" value="Login">
-            <!---Submit Button----->
         </form>
     </div>
-    <!--Body of Form ends--->
 </body>
 
 </html>

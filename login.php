@@ -95,6 +95,7 @@
     <!-- Body of Form starts -->
     <div class="container">
         <?php
+        session_start();
         include("oop.php");
         // include("registration.php");
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -106,9 +107,11 @@
             $data = $db->select("*", "users", "email='$email'");
             if ($data->rowcount() > 0) {
                 $row = $data->fetch(PDO::FETCH_ASSOC);
+                $admin = $result["admin"];
                 $hash = $row['password'];
                 $verify = password_verify($pass, $hash);
                 if ($verify) {
+                    $_SESSION["admin"] = $admin;
                     header("location:posts.php");
                     die();
                 } else {

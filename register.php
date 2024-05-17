@@ -128,7 +128,7 @@
                 } else {
                     if (count($error) <= 0) {
                         $db->insert("users", "firstName,secondName,phoneNo,email,password","'$firstName','$secondName','$phoneNo','$email','$password'");
-                        header("Location:../login.php");
+                        header("Location:login.php");
                         die();
                     }
                 }
